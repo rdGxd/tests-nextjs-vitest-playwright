@@ -10,7 +10,7 @@ import { InvalidTodo, makeValidateTodo, ValidTodo } from "./make-validate-todo";
 // mockImplementation -> Substitui a implementação original da função por uma nova função
 
 describe("makeValidateTodo (unit)", () => {
-  it("deve chamar a função sanitizeStr com a descrição correta", () => {
+    it("deve chamar a função sanitizeStr com a descrição correta", () => {
     const { description, sanitizeSpy } = makeMocks();
 
     makeValidateTodo(description);
@@ -21,11 +21,10 @@ describe("makeValidateTodo (unit)", () => {
   });
 
   it("deve chamar a função validateTodoDescription com o retorno de sanitizeStr", () => {
-    const { sanitizeSpy, validateTodoDescriptionSpy, description } =
-      makeMocks(); // Pegando os spies criados no makeMocks
+    const { sanitizeSpy, validateTodoDescriptionSpy, description } = makeMocks();
 
-    // Variavel para simular o retorno de sanitizeStr
     const sanitizeStrReturn = "retorno novo";
+
     // Mockando o retorno de sanitizeStr
     sanitizeSpy.mockReturnValue(sanitizeStrReturn);
 

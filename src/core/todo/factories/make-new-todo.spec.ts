@@ -1,7 +1,7 @@
 import { makeNewTodo } from "./make-new-todo";
 describe("makeNewTodo (unit)", () => {
   describe("create", () => {
-    test("deve retornar um novo todo válido", () => {
+    it("deve retornar um novo todo válido", () => {
       // AAA -> Arrange, Act, Assert
 
       // Arrange: prepara os dados necessários para o teste
