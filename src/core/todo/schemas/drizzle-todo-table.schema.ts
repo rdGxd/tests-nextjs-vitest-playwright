@@ -8,7 +8,4 @@ export const todoTable = sqliteTable("todo", {
 });
 
 export type TodoTableSelectModel = InferSelectModel<typeof todoTable>;
-export type TodoTableInsertModel = Omit<
-  TodoTableSelectModel,
-  "id" | "createdAt"
->;
+export type TodoTableInsertModel = InferSelectModel<typeof todoTable>;
