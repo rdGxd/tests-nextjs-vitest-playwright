@@ -1,7 +1,8 @@
 import * as sanitizeStrMod from "@/utils/sanitize-str";
+import { InvalidTodo, ValidTodo } from "../schemas/todo.contract";
 import * as validateTodoDescriptionMod from "../schemas/validate-todo-description";
 import * as makeNewTodoMod from "./make-new-todo";
-import { InvalidTodo, makeValidateTodo, ValidTodo } from "./make-validate-todo";
+import { makeValidateTodo } from "./make-validate-todo";
 // Mockar (mock) -> Substituir a implementação real por uma versão controlada temporariamente
 // vi.spyOn -> Cria um "espião" (spy) na função especificada, permitindo monitorar suas chamadas
 // mockReturnValue -> Define o valor que a função mockada deve retornar quando chamada
@@ -10,7 +11,7 @@ import { InvalidTodo, makeValidateTodo, ValidTodo } from "./make-validate-todo";
 // mockImplementation -> Substitui a implementação original da função por uma nova função
 
 describe("makeValidateTodo (unit)", () => {
-    it("deve chamar a função sanitizeStr com a descrição correta", () => {
+  it("deve chamar a função sanitizeStr com a descrição correta", () => {
     const { description, sanitizeSpy } = makeMocks();
 
     makeValidateTodo(description);
@@ -21,7 +22,8 @@ describe("makeValidateTodo (unit)", () => {
   });
 
   it("deve chamar a função validateTodoDescription com o retorno de sanitizeStr", () => {
-    const { sanitizeSpy, validateTodoDescriptionSpy, description } = makeMocks();
+    const { sanitizeSpy, validateTodoDescriptionSpy, description } =
+      makeMocks();
 
     const sanitizeStrReturn = "retorno novo";
 
