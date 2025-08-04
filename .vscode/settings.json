@@ -1,5 +1,5 @@
 {
   "code-runner.executorMap": {
-    "typescript": "pnpm dotenv -e .env.development -- tsx"
+    "typescript": "npx dotenv -e .env.development -- tsx"
   }
 }

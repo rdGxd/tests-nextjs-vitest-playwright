@@ -10,29 +10,29 @@ const commonKeys = {
 const envConfigs = {
   development: {
     databaseFile: "dev.db.sqlite3",
-    currentFile: "development",
+    currentEnv: "development",
     ...commonKeys,
   },
   production: {
     databaseFile: "prod.db.sqlite3",
-    currentFile: "production",
+    currentEnv: "production",
     ...commonKeys,
   },
   test: {
     databaseFile: "test.db.sqlite3",
-    currentFile: "test",
+    currentEnv: "test",
     ...commonKeys,
   },
   e2e: {
     databaseFile: "e2e.db.sqlite3",
-    currentFile: "e2e",
+    currentEnv: "e2e",
     ...commonKeys,
   },
 } as const;
 
 type ConfigsByEnv = {
   readonly databaseFile: string;
-  readonly currentFile: keyof EnvConfigs;
+  readonly currentEnv: keyof EnvConfigs;
 } & typeof commonKeys;
 
 type EnvConfigs = typeof envConfigs;
