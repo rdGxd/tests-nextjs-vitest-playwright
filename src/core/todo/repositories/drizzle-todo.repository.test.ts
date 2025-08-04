@@ -36,14 +36,95 @@ describe("DrizzleTodoRepository (integration)", () => {
   });
 
   describe("create", () => {
-    it("cria um todo se os dados estão válidos", async () => {});
-    it("falha se houver uma descrição igual na tabela", async () => {});
+    it("cria um todo se os dados estão válidos", async () => {
+      const { repository, todos } = await makeTestTodoRepository();
+      const newTodo = await repository.create(todos[0]);
 
-    it("falha se houver uma ID igual na tabela", async () => {});
+      expect(newTodo).toStrictEqual({
+        success: true,
+        todo: todos[0],
+      });
+    });
+    it("falha se houver uma descrição igual na tabela", async () => {
+      const { repository, todos } = await makeTestTodoRepository();
+      // Cria um novo TODO
+      await repository.create(todos[0]);
+
+      // Tenta criar um TODO com a mesma descrição
+      const duplicateTodo = {
+        id: "any id",
+        description: todos[0].description,
+        createdAt: "any date",
+      };
+
+      const result = await repository.create(duplicateTodo);
+
+      expect(result).toStrictEqual({
+        success: false,
+        errors: ["Já existe uma tarefa com essa descrição ou ID inválido."],
+      });
+    });
+
+    it("falha se houver uma ID igual na tabela", async () => {
+      const { repository, todos } = await makeTestTodoRepository();
+      // Cria um novo TODO
+      await repository.create(todos[0]);
+
+      // Tenta criar um TODO com a mesma ID
+      const duplicateTodo = {
+        id: todos[0].id,
+        description: "any description",
+        createdAt: "any date",
+      };
+
+      const result = await repository.create(duplicateTodo);
+
+      expect(result).toStrictEqual({
+        success: false,
+        errors: ["Já existe uma tarefa com essa descrição ou ID inválido."],
+      });
+    });
+
+    it("falha se houver uma Descrição e ID iguais na tabela", async () => {
+      const { repository, todos } = await makeTestTodoRepository();
+      // Cria um novo TODO
+      await repository.create(todos[0]);
+
+      // Tenta criar um TODO com a mesma ID
+      const duplicateTodo = {
+        id: todos[0].id,
+        description: todos[0].description,
+        createdAt: "any date",
+      };
+
+      const result = await repository.create(duplicateTodo);
+
+      expect(result).toStrictEqual({
+        success: false,
+        errors: ["Já existe uma tarefa com essa descrição ou ID inválido."],
+      });
+    });
   });
 
   describe("delete", () => {
-    it("deve remover um todo se a ID existir", async () => {});
-    it("falha se a ID não existir", async () => {});
+    it("deve remover um todo se a ID existir", async () => {
+      const { todos, repository } = await makeTestTodoRepository();
+      await insertTestTodos();
+
+      const result = await repository.remove(todos[0].id);
+      expect(result).toStrictEqual({
+        success: true,
+        todo: todos[0],
+      });
+    });
+    it("falha se a ID não existir", async () => {
+      const { repository } = await makeTestTodoRepository();
+
+      const result = await repository.remove("any id");
+      expect(result).toStrictEqual({
+        success: false,
+        errors: ["Tarefa não encontrada."],
+      });
+    });
   });
 });

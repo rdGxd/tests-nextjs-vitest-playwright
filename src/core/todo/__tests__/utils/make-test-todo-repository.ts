@@ -5,6 +5,7 @@ import { DrizzleTodoRepository } from "../../repositories/drizzle-todo.repositor
 export async function makeTestTodoRepository() {
   const { db, todoTable } = drizzleDatabase;
   const repository = new DrizzleTodoRepository(db);
+  const todos = makeTestTodos();
 
   const insertTodoDb = () => db.insert(todoTable);
   const deleteTodoNoWhere = () => db.delete(todoTable);
@@ -12,6 +13,7 @@ export async function makeTestTodoRepository() {
     db.delete(todoTable).where(eq(todoTable.id, id));
 
   return {
+    todos,
     repository,
     insertTodoDb,
     deleteTodoDb,
