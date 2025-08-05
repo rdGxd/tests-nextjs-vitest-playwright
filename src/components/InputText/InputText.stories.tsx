@@ -15,7 +15,7 @@ const meta: Meta<typeof InputText> = {
   argTypes: {
     type: {
       control: 'select',
-      options: ['text', 'password', 'email', 'tel', 'url', 'search'],
+      options: ['text', 'password', 'email', 'tel', 'url', 'search', 'number'],
       description: 'Esse é o tipo do input',
     },
     labelText: {

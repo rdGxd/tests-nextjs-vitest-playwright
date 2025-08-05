@@ -1,49 +1,112 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { HandMetalIcon, SmileIcon, StarIcon } from 'lucide-react';
 import { Button } from '.';
 
-const meta = {
+const iconMap = {
+  none: null,
+  hand: <HandMetalIcon />,
+  star: <StarIcon />,
+  smile: <SmileIcon />,
+};
+
+// Esse tipo estende o tipo do Button para adicionar propriedades
+// exclusivas para o Story, como "icon", por exemplo.
+type ButtonStoryProps = React.ComponentProps<typeof Button> & {
+  icon?: keyof typeof iconMap;
+};
+
+// Usando ButtonStoryProps porque icon não existe no botão
+const meta: Meta<ButtonStoryProps> = {
   title: 'Components/Forms/Button',
   component: Button,
+  argTypes: {
+    icon: {
+      control: { type: 'select' },
+      options: ['none', 'hand', 'star', 'smile'],
+      description: 'Ícone opcional exibido à esquerda do texto',
+      table: {
+        type: { summary: 'ReactNode' },
+        defaultValue: { summary: 'none' },
+      },
+    },
+    children: {
+      control: 'text',
+    },
+    variant: {
+      name: 'Variações',
+      options: ['default', 'ghost', 'danger'],
+      control: { type: 'select' },
+    },
+    size: {
+      control: { type: 'select' },
+      options: ['sm', 'md', 'lg'],
+    },
+  },
   decorators: [
     Story => (
-      <div className='max-w-screen mx-auto p-12 flex items-center justify-center'>
+      <div className='max-w-screen-lg mx-auto p-12'>
         <Story />
       </div>
     ),
   ],
-} satisfies Meta<typeof Button>;
+};
 
 export default meta;
 
-type Story = StoryObj<typeof Button>;
+// Usando ButtonStoryProps porque icon não existe no botão
 
-export const Default: Story = {
+type Story = StoryObj<ButtonStoryProps>;
+
+const render = ({ icon, children, ...args }: ButtonStoryProps) => (
+  <Button {...args}>
+    <>
+      {icon !== 'none' && iconMap[icon as keyof typeof iconMap]}{' '}
+      <span>{children}</span>
+    </>
+  </Button>
+);
+
+export const Playground: Story = {
   args: {
     children: 'Texto do botão',
-    variant: 'default',
-    size: 'lg',
+    icon: 'hand',
   },
-  // render: args => {
-  //   return (
-  //     <div className='max-w-screen mx-auto p-12 flex items-center justify-center bg-red-300'>
-  //       <Button {...args} />
-  //     </div>
-  //   );
-  // },
+  render,
 };
 
-export const Danger: Story = {
+export const Large: Story = {
   args: {
-    children: 'Texto do botão',
-    variant: 'danger',
+    ...Playground.args,
+    children: 'Click me',
+    icon: 'star',
     size: 'lg',
   },
-};
+  render: ({ icon, children, ...args }: ButtonStoryProps) => (
+    <div className='flex gap-6  flex-wrap'>
+      <Button {...args} className='flex-1'>
+        <>
+          {icon !== 'none' && iconMap[icon as keyof typeof iconMap]}{' '}
+          <span>{children}</span>
+        </>
+      </Button>
 
-export const Ghost: Story = {
-  args: {
-    children: 'Texto do botão',
-    variant: 'ghost',
-    size: 'lg',
-  },
+      <Button variant='ghost' {...args} className='flex-1'>
+        <>
+          {iconMap['hand']}
+          <span>{children}</span>
+        </>
+      </Button>
+
+      <Button variant='danger' {...args} className='flex-1'>
+        <>
+          {iconMap['smile']}
+          <span>{children}</span>
+        </>
+      </Button>
+
+      <Button variant='default' {...args} className='flex-1'>
+        Submit
+      </Button>
+    </div>
+  ),
 };
