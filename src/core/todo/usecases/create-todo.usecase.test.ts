@@ -1,5 +1,5 @@
+import { makeTestTodoRepository } from "@/core/__tests__/utils/make-test-todo-repository";
 import { beforeEach } from "vitest";
-import { makeTestTodoRepository } from "../__tests__/utils/make-test-todo-repository";
 import { InvalidTodo, ValidTodo } from "../schemas/todo.contract";
 import { createTodoUseCase } from "./create-todo.usecase";
 

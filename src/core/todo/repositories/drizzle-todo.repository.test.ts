@@ -1,8 +1,8 @@
-import { beforeEach } from "vitest";
 import {
-  insertTestTodos,
   makeTestTodoRepository,
-} from "../__tests__/utils/make-test-todo-repository";
+  insertTestTodos,
+} from "@/core/__tests__/utils/make-test-todo-repository";
+import { beforeEach } from "vitest";
 
 const { deleteTodoNoWhere } = await makeTestTodoRepository();
 
