@@ -3,6 +3,7 @@
     "typescript": "bunx dotenv -e .env.development -- tsx"
   },
   "cSpell.words": [
+    "autodocs",
     "mockada",
     "Mockando",
     "Mockar",
