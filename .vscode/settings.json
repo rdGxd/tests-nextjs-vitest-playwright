@@ -1,6 +1,6 @@
 {
   "code-runner.executorMap": {
-    "typescript": "bun dotenv -e .env.development -- tsx"
+    "typescript": "bunx dotenv -e .env.development -- tsx"
   },
   "cSpell.words": ["mockada", "Mockando", "Mockar", "usecase", "usecases"]
 }

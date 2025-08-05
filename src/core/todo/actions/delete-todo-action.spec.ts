@@ -14,9 +14,7 @@ describe('DeleteTodoAction (unit)', () => {
 
     await deleteTodoAction(fakeId);
 
-    expect(deleteTodoUseCaseSpy).toHaveBeenCalledExactlyOnceWith(
-      fakeId,
-    );
+    expect(deleteTodoUseCaseSpy).toHaveBeenCalledExactlyOnceWith(fakeId);
   });
 
   it('deve chamar o revalidatePath se o useCase retornar sucesso', async () => {

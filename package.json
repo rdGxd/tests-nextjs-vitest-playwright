@@ -40,6 +40,9 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@storybook/addon-essentials": "8.x",
+    "@storybook/nextjs": "8.x",
+    "@storybook/react": "8.x",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",
@@ -57,6 +60,7 @@
     "eslint-config-next": "15.4.5",
     "jsdom": "^26.1.0",
     "prettier": "3.6.2",
+    "storybook": "8.x",
     "tailwindcss": "^4",
     "tsx": "^4.20.3",
     "typescript": "^5",
