@@ -1,5 +1,5 @@
-import { makeValidateTodo } from "../factories/make-validate-todo";
-import { todoRepository } from "../repositories/default.repository";
+import { makeValidateTodo } from '../factories/make-validate-todo';
+import { todoRepository } from '../repositories/default.repository';
 
 export async function createTodoUseCase(description: string) {
   const validateResult = makeValidateTodo(description);

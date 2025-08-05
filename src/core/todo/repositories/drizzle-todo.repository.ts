@@ -1,8 +1,8 @@
-import { DrizzleDatabase } from "@/db/drizzle";
-import { eq } from "drizzle-orm";
-import { todoTable } from "../schemas/drizzle-todo-table.schema";
-import { Todo, TodoPresenter } from "../schemas/todo.contract";
-import { TodoRepository } from "./todo.contract.repository";
+import { DrizzleDatabase } from '@/db/drizzle';
+import { eq } from 'drizzle-orm';
+import { todoTable } from '../schemas/drizzle-todo-table.schema';
+import { Todo, TodoPresenter } from '../schemas/todo.contract';
+import { TodoRepository } from './todo.contract.repository';
 
 export class DrizzleTodoRepository implements TodoRepository {
   private readonly db: DrizzleDatabase;
@@ -25,14 +25,14 @@ export class DrizzleTodoRepository implements TodoRepository {
       where: (todoTable, { or, eq }) =>
         or(
           eq(todoTable.description, todoData.description),
-          eq(todoTable.id, todoData.id)
+          eq(todoTable.id, todoData.id),
         ),
     });
 
     if (existingTodo) {
       return {
         success: false,
-        errors: ["Já existe uma tarefa com essa descrição ou ID inválido."],
+        errors: ['Já existe uma tarefa com essa descrição ou ID inválido.'],
       };
     }
 
@@ -51,7 +51,7 @@ export class DrizzleTodoRepository implements TodoRepository {
     if (!existingTodo) {
       return {
         success: false,
-        errors: ["Tarefa não encontrada."],
+        errors: ['Tarefa não encontrada.'],
       };
     }
 

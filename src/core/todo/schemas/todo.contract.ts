@@ -4,7 +4,6 @@ export type Todo = {
   createdAt: string;
 };
 
-
 export type InvalidTodo = {
   success: false;
   errors: string[];

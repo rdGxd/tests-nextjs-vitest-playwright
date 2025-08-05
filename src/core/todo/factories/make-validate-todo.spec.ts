@@ -1,8 +1,8 @@
-import * as sanitizeStrMod from "@/utils/sanitize-str";
-import { InvalidTodo, ValidTodo } from "../schemas/todo.contract";
-import * as validateTodoDescriptionMod from "../schemas/validate-todo-description";
-import * as makeNewTodoMod from "./make-new-todo";
-import { makeValidateTodo } from "./make-validate-todo";
+import * as sanitizeStrMod from '@/utils/sanitize-str';
+import { InvalidTodo, ValidTodo } from '../schemas/todo.contract';
+import * as validateTodoDescriptionMod from '../schemas/validate-todo-description';
+import * as makeNewTodoMod from './make-new-todo';
+import { makeValidateTodo } from './make-validate-todo';
 // Mockar (mock) -> Substituir a implementação real por uma versão controlada temporariamente
 // vi.spyOn -> Cria um "espião" (spy) na função especificada, permitindo monitorar suas chamadas
 // mockReturnValue -> Define o valor que a função mockada deve retornar quando chamada
@@ -10,8 +10,8 @@ import { makeValidateTodo } from "./make-validate-todo";
 // mockRejectedValue -> Define o erro que a função mockada deve lançar quando chamada
 // mockImplementation -> Substitui a implementação original da função por uma nova função
 
-describe("makeValidateTodo (unit)", () => {
-  it("deve chamar a função sanitizeStr com a descrição correta", () => {
+describe('makeValidateTodo (unit)', () => {
+  it('deve chamar a função sanitizeStr com a descrição correta', () => {
     const { description, sanitizeSpy } = makeMocks();
 
     makeValidateTodo(description);
@@ -21,11 +21,11 @@ describe("makeValidateTodo (unit)", () => {
     // expect(sanitizeSpy).toHaveBeenCalledWith("Test Todo");
   });
 
-  it("deve chamar a função validateTodoDescription com o retorno de sanitizeStr", () => {
+  it('deve chamar a função validateTodoDescription com o retorno de sanitizeStr', () => {
     const { sanitizeSpy, validateTodoDescriptionSpy, description } =
       makeMocks();
 
-    const sanitizeStrReturn = "retorno novo";
+    const sanitizeStrReturn = 'retorno novo';
 
     // Mockando o retorno de sanitizeStr
     sanitizeSpy.mockReturnValue(sanitizeStrReturn);
@@ -33,11 +33,11 @@ describe("makeValidateTodo (unit)", () => {
     makeValidateTodo(description) as ValidTodo;
 
     expect(validateTodoDescriptionSpy).toHaveBeenCalledExactlyOnceWith(
-      sanitizeStrReturn
+      sanitizeStrReturn,
     );
   });
 
-  it("deve chamar makeNewTodo se validateTodoDescription retornar sucesso", () => {
+  it('deve chamar makeNewTodo se validateTodoDescription retornar sucesso', () => {
     const { description } = makeMocks();
     const result = makeValidateTodo(description) as ValidTodo;
 
@@ -52,7 +52,7 @@ describe("makeValidateTodo (unit)", () => {
     });
   });
 
-  it("deve retornar validatedDescription.errors se a validação falhou", () => {
+  it('deve retornar validatedDescription.errors se a validação falhou', () => {
     const { description, validateTodoDescriptionSpy, errors } = makeMocks();
 
     // Mockando o retorno de validateTodoDescription para simular erro
@@ -66,28 +66,28 @@ describe("makeValidateTodo (unit)", () => {
     expect(result).toStrictEqual({ errors, success: false });
   });
 
-  const makeMocks = (description = "Test Todo") => {
-    const errors = ["Erro de validação", "Outro erro", "Mais um erro"];
+  const makeMocks = (description = 'Test Todo') => {
+    const errors = ['Erro de validação', 'Outro erro', 'Mais um erro'];
 
     const todo = {
-      id: "any-id",
+      id: 'any-id',
       description,
-      createdAt: "any-date",
+      createdAt: 'any-date',
     };
 
     const sanitizeSpy = vi
-      .spyOn(sanitizeStrMod, "sanitizeStr")
+      .spyOn(sanitizeStrMod, 'sanitizeStr')
       .mockReturnValue(description);
 
     const validateTodoDescriptionSpy = vi
-      .spyOn(validateTodoDescriptionMod, "validateTodoDescription")
+      .spyOn(validateTodoDescriptionMod, 'validateTodoDescription')
       .mockReturnValue({
         success: true,
         errors: [],
       });
 
     const makeNewTodoSpy = vi
-      .spyOn(makeNewTodoMod, "makeNewTodo")
+      .spyOn(makeNewTodoMod, 'makeNewTodo')
       .mockReturnValue(todo);
 
     return {

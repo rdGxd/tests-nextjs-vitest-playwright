@@ -4,13 +4,13 @@ type ValidateTodoDescriptions = {
 };
 
 export function validateTodoDescription(
-  description: string
+  description: string,
 ): ValidateTodoDescriptions {
   const errors: string[] = [];
   if (description.length < 5 || description.length > 100) {
-    errors.push("Descrição deve ter entre 5 e 100 caracteres");
+    errors.push('Descrição deve ter entre 5 e 100 caracteres');
   }
-  
+
   return {
     success: errors.length === 0,
     errors,
