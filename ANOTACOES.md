@@ -2,7 +2,7 @@
 
 Por [Rodrigo Silva](https://github.com/rdgxd) em junho de 2025.
 
-**Material de Apoio Pessoal**
+## Material de Apoio Pessoal
 
 Essas anotações foram feitas enquanto eu montava os testes do projeto. Elas não
 foram pensadas como conteúdo "formal", mas como um guia real de quem tá no meio
@@ -355,7 +355,7 @@ como e-mail, storage, etc.
 Como podemos ter dificuldades em escrever os nomes dos testes, aqui estão alguns
 exemplos:
 
-```
+```bash
 | Ação                 | Exemplo adaptável                           |
 |----------------------|---------------------------------------------|
 | `renders`            | `renders input with label`                  |
@@ -574,7 +574,7 @@ await screen.findByText("Carregando...");
 expect(screen.queryByText("Erro")).not.toBeInTheDocument();
 ```
 
-### 🧭 Ordem de prioridade dos seletores
+### 🧭 Ordem de prioridade dos seletores na Testing Library
 
 > Do mais recomendado ao menos recomendado (da perspectiva do usuário):
 
@@ -902,10 +902,9 @@ await page.getByLabel("Senha").fill("123456");
 
 ---
 
-### 💡 Dica final
+### 💡 Dica final do Playwright
 
-> "Teste o fluxo real do usuário. Se o seu teste depende do DOM exato, ele tá
-> errado."
+> "Teste o fluxo real do usuário. Se o seu teste depende do DOM exato, ele tá errado."
 
 ---
 
