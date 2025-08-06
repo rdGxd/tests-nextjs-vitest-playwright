@@ -1,5 +1,5 @@
 import { createTodoAction } from '@/core/todo/actions/create-todo-action';
-import { deleteTodoAction } from '@/core/todo/actions/delete-todo.action';
+import { deleteTodoAction } from '@/core/todo/actions/delete-todo-action';
 import { todoRepository } from '@/core/todo/repositories/default.repository';
 import { TodoForm } from '../TodoForm';
 import { TodoList } from '../TodoList';

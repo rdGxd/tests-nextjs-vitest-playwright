@@ -1,5 +1,5 @@
 import { makeTestTodoMocks } from '@/core/__tests__/utils/make-test-todo-mocks';
-import { deleteTodoAction } from './delete-todo.action';
+import { deleteTodoAction } from './delete-todo-action';
 
 vi.mock('next/cache', () => {
   return {

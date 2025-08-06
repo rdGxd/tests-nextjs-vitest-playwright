@@ -1,5 +1,6 @@
-import { fn } from '@storybook/test';
 import { TodoForm } from '.';
+import type { Meta, StoryObj } from '@storybook/react';
+import { todoActionStoryMock } from '@/core/__tests__/mocks/todo-action-story';
 
 const meta: Meta<typeof TodoForm> = {
   title: 'Components/Forms/TodoForm',
@@ -12,7 +13,9 @@ const meta: Meta<typeof TodoForm> = {
     ),
   ],
   argTypes: {
-    action: { control: false },
+    action: {
+      control: false,
+    },
   },
 };
 
@@ -22,26 +25,12 @@ type Story = StoryObj<typeof TodoForm>;
 
 export const Default: Story = {
   args: {
-    action: fn(async () => {
-      return {
-        success: true,
-        todo: {
-          id: '1',
-          description: 'Tarefa criada com sucesso',
-          createdAt: 'date',
-        },
-      };
-    }),
+    action: todoActionStoryMock.create.success,
   },
 };
 
 export const WithError: Story = {
   args: {
-    action: fn(async () => {
-      return {
-        success: false,
-        errors: ['Erro ao criar a tarefa'],
-      };
-    }),
+    action: todoActionStoryMock.create.error,
   },
 };
