@@ -687,8 +687,9 @@ ESLint**, e provavelmente escondendo bugs sem querer.
 ### 🧠 Regras de ouro
 
 - ✅ Use `@ts-expect-error` **quando estiver testando ou forçando erro**.
-- ✅ Use `eslint-disable` **só quando o ESLint estiver sendo mais chato que
-  útil, e volte com `enable` depois**.
+- ✅ Use `eslint-disable`
+- **só quando o ESLint estiver sendo mais chato que útil, e volte com `enable`
+  depois**.
 - ❌ Não use `@ts-ignore` — é o botão "foda-se", e você vai esquecer onde
   colocou.
 - ❌ Não use `any` sem explicar o motivo (nem nos testes).
