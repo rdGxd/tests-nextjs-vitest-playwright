@@ -92,6 +92,44 @@ test.describe("Home Page E2E Tests", () => {
         await expect(createdTodo).toBeVisible();
       }
     });
+
+    test("deve desabilitar o botão enquanto a tarefa está sendo criada", async ({
+      page,
+    }) => {
+      const { button, input } = getAll(page);
+
+      await input.fill(NEW_TODO_TEXT);
+      await button.click();
+
+      await expect(getButtonBusy(page)).toBeVisible();
+      await expect(getButtonBusy(page)).toBeDisabled();
+
+      const createdTodo = page
+        .getByRole("listitem")
+        .filter({ hasText: NEW_TODO_TEXT });
+      await expect(createdTodo).toBeVisible();
+
+      await expect(button).toBeVisible();
+      await expect(button).toBeEnabled();
+    });
+
+    test("deve desabilitar o input enquanto a tarefa está sendo criada", async ({
+      page,
+    }) => {
+      const { button, input } = getAll(page);
+
+      await input.fill(NEW_TODO_TEXT);
+      await button.click();
+
+      await expect(input).toBeDisabled();
+
+      const createdTodo = page
+        .getByRole("listitem")
+        .filter({ hasText: NEW_TODO_TEXT });
+      await expect(createdTodo).toBeVisible();
+
+      await expect(input).toBeEnabled();
+    });
   });
 
   test.describe("Exclusão", () => {});
