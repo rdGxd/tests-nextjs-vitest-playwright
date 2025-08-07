@@ -32,7 +32,6 @@ test.afterAll(async () => {
 });
 
 test.describe("Home Page E2E Tests", () => {
-  // Renderização
   test.describe("Renderização", () => {
     test("deve ter o title correto", async ({ page }) => {
       await expect(page).toHaveTitle("Lista de Tarefas");
@@ -46,10 +45,55 @@ test.describe("Home Page E2E Tests", () => {
       await expect(getButton(page)).toBeVisible();
     });
   });
-  // Criação
-  test.describe("Criação", () => {});
-  // Exclusão
+
+  test.describe("Criação", () => {
+    test("deve permitir criar uma nova tarefa", async ({ page }) => {
+      const { button, input } = getAll(page);
+      await input.fill(NEW_TODO_TEXT);
+      await button.click();
+
+      const createdTodo = page
+        .getByRole("listitem")
+        .filter({ hasText: NEW_TODO_TEXT });
+      await expect(createdTodo).toBeVisible();
+    });
+
+    test("deve fazer o trim da descrição do input ao criar o TODO", async ({
+      page,
+    }) => {
+      const { button, input } = getAll(page);
+
+      const textToBeTrimmed = "   no spaces here   ";
+      const textTrimmed = textToBeTrimmed.trim();
+
+      await input.fill(textToBeTrimmed);
+      await button.click();
+
+      const createdTodo = page
+        .getByRole("listitem")
+        .filter({ hasText: textTrimmed });
+      const createdTodoText = await createdTodo.textContent();
+
+      expect(createdTodoText).toBe(textTrimmed);
+    });
+
+    test("deve permitir criar múltiplas tarefas", async ({ page }) => {
+      const { button, input } = getAll(page);
+
+      const tasks = ["Tarefa 1", "Tarefa 2", "Tarefa 3"];
+
+      for (const task of tasks) {
+        await input.fill(task);
+        await button.click();
+
+        const createdTodo = page
+          .getByRole("listitem")
+          .filter({ hasText: task });
+        await expect(createdTodo).toBeVisible();
+      }
+    });
+  });
+
   test.describe("Exclusão", () => {});
-  // Erros
   test.describe("Erros", () => {});
 });
