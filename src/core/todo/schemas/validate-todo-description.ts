@@ -7,8 +7,8 @@ export function validateTodoDescription(
   description: string,
 ): ValidateTodoDescriptions {
   const errors: string[] = [];
-  if (description.length < 5 || description.length > 100) {
-    errors.push('Descrição deve ter entre 5 e 100 caracteres');
+  if (description.length <= 3 || description.length > 100) {
+    errors.push('Descrição precisa ter mais de 3 caracteres');
   }
 
   return {

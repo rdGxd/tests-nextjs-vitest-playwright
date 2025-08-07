@@ -1,4 +1,4 @@
-import { getFullEnv } from "@/env/configs";
+import { getFullEnv } from '@/env/configs';
 
 /**
  * ! Aguarda um pequeno delay artificial, **somente em ambientes de desenvolvimento ou teste**.
@@ -15,15 +15,15 @@ import { getFullEnv } from "@/env/configs";
  *
  * TODO: Considerar adicionar logs para debug quando o delay for executado
  */
-export async function devOnlyDelay(delay: number = 1000): Promise<void> {
+export async function devOnlyDelay(delay: number = 5000): Promise<void> {
   const { currentEnv } = getFullEnv();
 
-  const envsToDelay = ["e2e"];
+  const envsToDelay = ['e2e'];
 
   const shouldDelay = delay > 0 && envsToDelay.includes(currentEnv);
 
   if (shouldDelay) {
-    return new Promise((resolve) => setTimeout(resolve, delay));
+    return new Promise(resolve => setTimeout(resolve, delay));
   }
 
   return;
